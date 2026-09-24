@@ -147,7 +147,7 @@ body {
 
 
 /* =====================================================
-   BUTTON
+   START BUTTON
 ===================================================== */
 
 .start-button {
@@ -341,7 +341,7 @@ body {
 
 
 /* =====================================================
-   ANSWER BOX POSITIONS
+   ANSWER POSITIONS
 ===================================================== */
 
 #answer1 {
@@ -401,7 +401,7 @@ body {
 
 
 /* =====================================================
-   SUBMIT BUTTON
+   SUBMIT
 ===================================================== */
 
 .button-area {
@@ -437,7 +437,7 @@ body {
 
 
 /* =====================================================
-   SCORE DASHBOARD
+   RESULT SCREEN
 ===================================================== */
 
 #resultScreen {
@@ -478,7 +478,7 @@ body {
 }
 
 
-/* STUDENT RESULT INFO */
+/* RESULT INFO */
 
 .result-info {
 
@@ -571,7 +571,7 @@ body {
 
 .teacher-card {
 
-    max-width: 1200px;
+    max-width: 1250px;
 
     margin: auto;
 
@@ -609,7 +609,7 @@ table {
 
     border-collapse: collapse;
 
-    min-width: 800px;
+    min-width: 850px;
 }
 
 th {
@@ -735,7 +735,6 @@ tr:nth-child(even) {
 
 
 <!-- =====================================================
-     SCREEN 1
      STUDENT INFORMATION
 ===================================================== -->
 
@@ -773,7 +772,7 @@ tr:nth-child(even) {
         </div>
 
 
-        <!-- NAME -->
+        <!-- STUDENT NAME -->
 
         <label>
             👤 Student Name
@@ -848,6 +847,8 @@ tr:nth-child(even) {
         </select>
 
 
+        <!-- START -->
+
         <button
             class="start-button"
             onclick="startActivity()"
@@ -862,8 +863,7 @@ tr:nth-child(even) {
 
 
 <!-- =====================================================
-     SCREEN 2
-     ACTIVITY
+     ACTIVITY SCREEN
 ===================================================== -->
 
 <div id="activityScreen">
@@ -894,7 +894,7 @@ tr:nth-child(even) {
     </div>
 
 
-    <!-- CAREER -->
+    <!-- CAREER MESSAGE -->
 
     <div class="career-message">
 
@@ -908,6 +908,7 @@ tr:nth-child(even) {
     <div class="activity-instruction">
 
         📝 SOLVE ALL 5 PROBLEMS IN YOUR NOTEBOOK.
+
         <br>
 
         Show your solution first, then enter your
@@ -920,8 +921,13 @@ tr:nth-child(even) {
 
     <div class="activity">
 
+        <!-- IMPORTANT:
+             This image must be in the SAME folder
+             as index.html.
+        -->
+
         <img
-            src="./direct-proportion.png"
+            src="direct-proportion.png"
             alt="Direct Proportion Measurement Activity"
         >
 
@@ -991,8 +997,7 @@ tr:nth-child(even) {
 
 
 <!-- =====================================================
-     SCREEN 3
-     STUDENT RESULT
+     RESULT SCREEN
 ===================================================== -->
 
 <div id="resultScreen">
@@ -1066,7 +1071,6 @@ tr:nth-child(even) {
 
 
 <!-- =====================================================
-     SCREEN 4
      TEACHER DASHBOARD
 ===================================================== -->
 
@@ -1152,7 +1156,6 @@ tr:nth-child(even) {
 
 
 <script>
-
 
 /* =====================================================
    ANSWER KEY
@@ -1259,7 +1262,7 @@ function startActivity() {
 
 
 /* =====================================================
-   SUBMIT ACTIVITY
+   SUBMIT
 ===================================================== */
 
 function submitActivity() {
@@ -1267,7 +1270,7 @@ function submitActivity() {
     let score = 0;
 
 
-    /* CHECK ALL ANSWERS */
+    /* CHECK ANSWERS */
 
     for (let i = 1; i <= 5; i++) {
 
@@ -1289,7 +1292,7 @@ function submitActivity() {
     }
 
 
-    /* GET STUDENT INFORMATION */
+    /* STUDENT DATA */
 
     const name =
         document.getElementById("studentName").value;
@@ -1305,16 +1308,11 @@ function submitActivity() {
         score * 20;
 
 
-    /* DATE AND TIME */
-
-    const now =
-        new Date();
-
     const dateTime =
-        now.toLocaleString();
+        new Date().toLocaleString();
 
 
-    /* CREATE RESULT */
+    /* RESULT OBJECT */
 
     const result = {
 
@@ -1333,11 +1331,13 @@ function submitActivity() {
     };
 
 
-    /* SAVE RESULT */
+    /* SAVE */
 
     let results =
         JSON.parse(
-            localStorage.getItem("directProportionResults")
+            localStorage.getItem(
+                "directProportionResults"
+            )
         ) || [];
 
 
@@ -1350,7 +1350,7 @@ function submitActivity() {
     );
 
 
-    /* SHOW RESULT */
+    /* RESULT DISPLAY */
 
     document.getElementById("resultName").innerText =
         name;
@@ -1368,9 +1368,10 @@ function submitActivity() {
         percentage;
 
 
-    /* PERFORMANCE MESSAGE */
+    /* PERFORMANCE */
 
-    let message = "";
+    let message;
+
 
     if (score === 5) {
 
@@ -1405,7 +1406,7 @@ function submitActivity() {
         message;
 
 
-    /* SWITCH SCREEN */
+    /* SWITCH */
 
     document.getElementById("activityScreen").style.display =
         "none";
@@ -1431,8 +1432,6 @@ function newStudent() {
         "flex";
 
 
-    /* CLEAR INFORMATION */
-
     document.getElementById("studentName").value =
         "";
 
@@ -1442,8 +1441,6 @@ function newStudent() {
     document.getElementById("profession").value =
         "";
 
-
-    /* CLEAR ANSWERS */
 
     for (let i = 1; i <= 5; i++) {
 
@@ -1472,7 +1469,6 @@ function showTeacherDashboard() {
 
     displayResults();
 
-
     window.scrollTo(0, 0);
 }
 
@@ -1492,7 +1488,9 @@ function displayResults() {
 
     const results =
         JSON.parse(
-            localStorage.getItem("directProportionResults")
+            localStorage.getItem(
+                "directProportionResults"
+            )
         ) || [];
 
 
@@ -1527,11 +1525,19 @@ function displayResults() {
 
                 <td>${result.profession}</td>
 
-                <td><strong>${result.score}/5</strong></td>
+                <td>
+                    <strong>
+                        ${result.score}/5
+                    </strong>
+                </td>
 
-                <td>${result.percentage}%</td>
+                <td>
+                    ${result.percentage}%
+                </td>
 
-                <td>${result.dateTime}</td>
+                <td>
+                    ${result.dateTime}
+                </td>
 
             `;
 
@@ -1551,13 +1557,17 @@ function downloadCSV() {
 
     const results =
         JSON.parse(
-            localStorage.getItem("directProportionResults")
+            localStorage.getItem(
+                "directProportionResults"
+            )
         ) || [];
 
 
     if (results.length === 0) {
 
-        alert("There are no results to download.");
+        alert(
+            "There are no student results to download."
+        );
 
         return;
     }
@@ -1599,20 +1609,12 @@ function downloadCSV() {
         document.createElement("a");
 
 
-    link.setAttribute(
-        "href",
-        url
-    );
+    link.href =
+        url;
 
 
-    link.setAttribute(
-        "download",
-        "Direct_Proportion_Results.csv"
-    );
-
-
-    link.style.visibility =
-        "hidden";
+    link.download =
+        "Direct_Proportion_Results.csv";
 
 
     document.body.appendChild(link);
@@ -1622,6 +1624,9 @@ function downloadCSV() {
 
 
     document.body.removeChild(link);
+
+
+    URL.revokeObjectURL(url);
 }
 
 
@@ -1631,13 +1636,13 @@ function downloadCSV() {
 
 function clearResults() {
 
-    const confirmClear =
+    const confirmation =
         confirm(
-            "Are you sure you want to delete all saved student results?"
+            "Are you sure you want to delete ALL saved results?"
         );
 
 
-    if (!confirmClear) {
+    if (!confirmation) {
 
         return;
     }
@@ -1649,7 +1654,6 @@ function clearResults() {
 
 
     displayResults();
-
 }
 
 
@@ -1664,7 +1668,6 @@ function backToResult() {
 
     document.getElementById("resultScreen").style.display =
         "block";
-
 
     window.scrollTo(0, 0);
 }
