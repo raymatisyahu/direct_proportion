@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Direct Proportion Measurement Challenge</title>
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #dceeff, #fff6d6);
+    color: #111;
+}
+
+
+/* =====================================================
+   STUDENT INFORMATION SCREEN
+===================================================== */
+
+#studentScreen {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+.student-card {
+    width: 100%;
+    max-width: 720px;
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 25px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+
+    border-top: 10px solid #063b70;
+}
+
+.student-card h1 {
+    margin: 0;
+
+    text-align: center;
+
+    color: #063b70;
+
+    font-size: 38px;
+
+    font-weight: 900;
+}
+
+.subtitle {
+    text-align: center;
+
+    font-size: 21px;
+
+    font-weight: bold;
+
+    color: #555;
+
+    margin: 8px 0 20px;
+}
+
+
+/* =====================================================
+   NOTEBOOK INSTRUCTION
+===================================================== */
+
+.notebook-instruction {
+
+    background: #fff8dc;
+
+    border: 3px solid #e0ae00;
+
+    border-radius: 15px;
+
+    padding: 17px;
+
+    margin-bottom: 22px;
+
+    text-align: center;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.student-card label {
+
+    display: block;
+
+    text-align: left;
+
+    margin-top: 18px;
+
+    margin-bottom: 7px;
+
+    font-size: 19px;
+
+    font-weight: bold;
+}
+
+.student-card input,
+.student-card select {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: 2px solid #777;
+
+    border-radius: 10px;
+
+    font-size: 19px;
+
+    background: white;
+}
+
+.student-card input:focus,
+.student-card select:focus {
+
+    border-color: #0875bd;
+
+    outline: none;
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.start-button {
+
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 16px;
+
+    background: #0875bd;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 12px;
+
+    font-size: 21px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.start-button:hover {
+    background: #064d7d;
+}
+
+
+/* =====================================================
+   ACTIVITY SCREEN
+===================================================== */
+
+#activityScreen {
+    display: none;
+
+    padding: 10px;
+}
+
+.activity-title {
+
+    text-align: center;
+
+    color: #063b70;
+
+    font-size: 34px;
+
+    font-weight: 900;
+
+    margin: 5px 0;
+}
+
+
+/* =====================================================
+   STUDENT INFORMATION
+===================================================== */
+
+.student-info {
+
+    width: fit-content;
+
+    max-width: 100%;
+
+    margin: 5px auto;
+
+    background: white;
+
+    padding: 9px 20px;
+
+    border-radius: 20px;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   CAREER MESSAGE
+===================================================== */
+
+.career-message {
+
+    max-width: 1100px;
+
+    margin: 8px auto;
+
+    background: #fff8dc;
+
+    border: 2px solid #d5a900;
+
+    border-radius: 12px;
+
+    padding: 10px 15px;
+
+    text-align: center;
+
+    font-size: 18px;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   ACTIVITY INSTRUCTION
+===================================================== */
+
+.activity-instruction {
+
+    max-width: 1100px;
+
+    margin: 8px auto 12px;
+
+    background: #eaffea;
+
+    border: 3px solid #329b32;
+
+    border-radius: 12px;
+
+    padding: 10px;
+
+    text-align: center;
+
+    font-size: 19px;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   IMAGE
+===================================================== */
+
+.activity {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 1536px;
+
+    margin: auto;
+}
+
+.activity img {
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+}
+
+
+/* =====================================================
+   ANSWER BOXES
+===================================================== */
+
+.answer {
+
+    position: absolute;
+
+    background: white;
+
+    border: 3px solid #222;
+
+    border-radius: 7px;
+
+    text-align: center;
+
+    font-size: clamp(16px, 2vw, 28px);
+
+    font-weight: bold;
+
+    padding: 0;
+
+    outline: none;
+
+    z-index: 10;
+}
+
+.answer:focus {
+
+    border-color: #0875bd;
+
+    box-shadow: 0 0 8px rgba(0,100,200,0.5);
+}
+
+
+/* =====================================================
+   ANSWER BOX POSITIONS
+===================================================== */
+
+#answer1 {
+
+    left: 36.784%;
+
+    top: 50.586%;
+
+    width: 6.706%;
+
+    height: 4.981%;
+}
+
+#answer2 {
+
+    left: 85.612%;
+
+    top: 50.586%;
+
+    width: 7.031%;
+
+    height: 4.981%;
+}
+
+#answer3 {
+
+    left: 20.703%;
+
+    top: 90.820%;
+
+    width: 7.227%;
+
+    height: 5.664%;
+}
+
+#answer4 {
+
+    left: 55.078%;
+
+    top: 90.820%;
+
+    width: 6.706%;
+
+    height: 5.566%;
+}
+
+#answer5 {
+
+    left: 88.021%;
+
+    top: 90.820%;
+
+    width: 6.706%;
+
+    height: 5.566%;
+}
+
+
+/* =====================================================
+   SUBMIT BUTTON
+===================================================== */
+
+.button-area {
+
+    text-align: center;
+
+    margin: 18px 0 35px;
+}
+
+.submit-button {
+
+    padding: 15px 35px;
+
+    background: #078b3d;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 12px;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.submit-button:hover {
+
+    background: #056c2f;
+}
+
+
+/* =====================================================
+   SCORE DASHBOARD
+===================================================== */
+
+#resultScreen {
+
+    display: none;
+
+    min-height: 100vh;
+
+    padding: 30px 15px;
+}
+
+.result-card {
+
+    max-width: 850px;
+
+    margin: auto;
+
+    background: white;
+
+    border-radius: 25px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+
+    border-top: 12px solid #078b3d;
+}
+
+.result-card h1 {
+
+    color: #078b3d;
+
+    font-size: 40px;
+
+    margin: 5px 0 20px;
+}
+
+
+/* STUDENT RESULT INFO */
+
+.result-info {
+
+    font-size: 20px;
+
+    line-height: 1.8;
+
+    margin-bottom: 20px;
+}
+
+
+/* BIG SCORE */
+
+.big-score {
+
+    font-size: 90px;
+
+    font-weight: 900;
+
+    color: #063b70;
+
+    margin: 15px 0;
+}
+
+.percent {
+
+    font-size: 32px;
+
+    font-weight: bold;
+
+    color: #078b3d;
+}
+
+.performance {
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    margin: 20px;
+}
+
+
+/* RESULT BUTTONS */
+
+.result-button {
+
+    padding: 13px 25px;
+
+    margin: 6px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.new-student {
+
+    background: #0875bd;
+
+    color: white;
+}
+
+.teacher-button {
+
+    background: #063b70;
+
+    color: white;
+}
+
+
+/* =====================================================
+   TEACHER DASHBOARD
+===================================================== */
+
+#teacherScreen {
+
+    display: none;
+
+    padding: 25px 15px;
+
+    min-height: 100vh;
+}
+
+.teacher-card {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    box-shadow: 0 7px 20px rgba(0,0,0,0.2);
+}
+
+.teacher-card h1 {
+
+    text-align: center;
+
+    color: #063b70;
+
+    font-size: 34px;
+}
+
+
+/* TABLE */
+
+.table-container {
+
+    overflow-x: auto;
+
+    margin-top: 20px;
+}
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 800px;
+}
+
+th {
+
+    background: #063b70;
+
+    color: white;
+
+    padding: 12px;
+
+    font-size: 16px;
+}
+
+td {
+
+    border: 1px solid #ccc;
+
+    padding: 10px;
+
+    text-align: center;
+
+    font-size: 15px;
+}
+
+tr:nth-child(even) {
+
+    background: #f3f8fc;
+}
+
+
+/* TEACHER BUTTONS */
+
+.teacher-actions {
+
+    text-align: center;
+
+    margin-top: 20px;
+}
+
+.teacher-action-button {
+
+    padding: 12px 20px;
+
+    margin: 5px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.download {
+
+    background: #078b3d;
+
+    color: white;
+}
+
+.back {
+
+    background: #777;
+
+    color: white;
+}
+
+.clear {
+
+    background: #c62828;
+
+    color: white;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .student-card {
+
+        padding: 25px 20px;
+    }
+
+    .student-card h1 {
+
+        font-size: 29px;
+    }
+
+    .activity-title {
+
+        font-size: 24px;
+    }
+
+    .student-info {
+
+        font-size: 14px;
+    }
+
+    .career-message,
+    .activity-instruction {
+
+        font-size: 15px;
+    }
+
+    .big-score {
+
+        font-size: 70px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SCREEN 1
+     STUDENT INFORMATION
+===================================================== -->
+
+<div id="studentScreen">
+
+    <div class="student-card">
+
+        <h1>
+            📐 DIRECT PROPORTION
+        </h1>
+
+        <div class="subtitle">
+            Measurement Career Challenge
+        </div>
+
+
+        <div class="notebook-instruction">
+
+            📝 <strong>GET YOUR NOTEBOOK READY!</strong>
+
+            <br><br>
+
+            Solve each problem in your notebook.
+
+            <br>
+
+            <strong>Show your solution and write your
+            final answer.</strong>
+
+            <br><br>
+
+            After solving, enter only your
+            <strong>final answer</strong> in the box on the screen.
+
+        </div>
+
+
+        <!-- NAME -->
+
+        <label>
+            👤 Student Name
+        </label>
+
+        <input
+            type="text"
+            id="studentName"
+            placeholder="Enter your full name"
+        >
+
+
+        <!-- SECTION -->
+
+        <label>
+            🏫 Section
+        </label>
+
+        <select id="section">
+
+            <option value="">
+                Select your section
+            </option>
+
+            <option value="Grade 6 - Dianga">
+                Grade 6 - Dianga
+            </option>
+
+            <option value="Grade 6 - Narvaez">
+                Grade 6 - Narvaez
+            </option>
+
+        </select>
+
+
+        <!-- PROFESSION -->
+
+        <label>
+            🎯 Measurement Profession
+        </label>
+
+        <select id="profession">
+
+            <option value="">
+                Choose a profession
+            </option>
+
+            <option value="Civil Engineer">
+                🏗️ Civil Engineer
+            </option>
+
+            <option value="Architect">
+                🏛️ Architect
+            </option>
+
+            <option value="Surveyor">
+                📐 Surveyor
+            </option>
+
+            <option value="Interior Designer">
+                🪑 Interior Designer
+            </option>
+
+            <option value="Construction Worker">
+                🏠 Construction Worker
+            </option>
+
+            <option value="Geodetic Engineer">
+                🗺️ Geodetic Engineer
+            </option>
+
+        </select>
+
+
+        <button
+            class="start-button"
+            onclick="startActivity()"
+        >
+            🚀 I'M READY — START ACTIVITY
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     SCREEN 2
+     ACTIVITY
+===================================================== -->
+
+<div id="activityScreen">
+
+
+    <div class="activity-title">
+
+        DIRECT PROPORTION:
+        MEASUREMENT CHALLENGE
+
+    </div>
+
+
+    <!-- STUDENT INFORMATION -->
+
+    <div class="student-info">
+
+        👤 <span id="displayName"></span>
+
+        &nbsp; | &nbsp;
+
+        🏫 <span id="displaySection"></span>
+
+        &nbsp; | &nbsp;
+
+        🎯 <span id="displayProfession"></span>
+
+    </div>
+
+
+    <!-- CAREER -->
+
+    <div class="career-message">
+
+        <span id="careerMessage"></span>
+
+    </div>
+
+
+    <!-- INSTRUCTION -->
+
+    <div class="activity-instruction">
+
+        📝 SOLVE ALL 5 PROBLEMS IN YOUR NOTEBOOK.
+        <br>
+
+        Show your solution first, then enter your
+        <strong>final answers</strong> in the boxes.
+
+    </div>
+
+
+    <!-- IMAGE -->
+
+    <div class="activity">
+
+        <img
+            src="./direct-proportion.png"
+            alt="Direct Proportion Measurement Activity"
+        >
+
+
+        <!-- ANSWER 1 -->
+
+        <input
+            type="number"
+            id="answer1"
+            class="answer"
+        >
+
+
+        <!-- ANSWER 2 -->
+
+        <input
+            type="number"
+            id="answer2"
+            class="answer"
+        >
+
+
+        <!-- ANSWER 3 -->
+
+        <input
+            type="number"
+            id="answer3"
+            class="answer"
+        >
+
+
+        <!-- ANSWER 4 -->
+
+        <input
+            type="number"
+            id="answer4"
+            class="answer"
+        >
+
+
+        <!-- ANSWER 5 -->
+
+        <input
+            type="number"
+            id="answer5"
+            class="answer"
+        >
+
+    </div>
+
+
+    <!-- SUBMIT -->
+
+    <div class="button-area">
+
+        <button
+            class="submit-button"
+            onclick="submitActivity()"
+        >
+            ✅ SUBMIT ANSWERS
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     SCREEN 3
+     STUDENT RESULT
+===================================================== -->
+
+<div id="resultScreen">
+
+    <div class="result-card">
+
+        <h1>
+            🎉 ACTIVITY COMPLETED!
+        </h1>
+
+
+        <div class="result-info">
+
+            👤 <strong id="resultName"></strong>
+
+            <br>
+
+            🏫 <strong id="resultSection"></strong>
+
+            <br>
+
+            🎯 <strong id="resultProfession"></strong>
+
+        </div>
+
+
+        <div>
+            YOUR SCORE
+        </div>
+
+
+        <div class="big-score">
+
+            <span id="resultScore"></span>/5
+
+        </div>
+
+
+        <div class="percent">
+
+            <span id="resultPercent"></span>%
+
+        </div>
+
+
+        <div
+            id="performance"
+            class="performance"
+        ></div>
+
+
+        <button
+            class="result-button new-student"
+            onclick="newStudent()"
+        >
+            👤 NEW STUDENT
+        </button>
+
+
+        <button
+            class="result-button teacher-button"
+            onclick="showTeacherDashboard()"
+        >
+            📊 TEACHER DASHBOARD
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     SCREEN 4
+     TEACHER DASHBOARD
+===================================================== -->
+
+<div id="teacherScreen">
+
+    <div class="teacher-card">
+
+        <h1>
+            📊 TEACHER DASHBOARD
+        </h1>
+
+        <p style="text-align:center;font-weight:bold;">
+            Direct Proportion Measurement Challenge
+        </p>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>#</th>
+
+                        <th>Student Name</th>
+
+                        <th>Section</th>
+
+                        <th>Profession</th>
+
+                        <th>Score</th>
+
+                        <th>Percentage</th>
+
+                        <th>Date & Time</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="resultsTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="teacher-actions">
+
+            <button
+                class="teacher-action-button download"
+                onclick="downloadCSV()"
+            >
+                📥 DOWNLOAD RESULTS
+            </button>
+
+
+            <button
+                class="teacher-action-button back"
+                onclick="backToResult()"
+            >
+                ← BACK
+            </button>
+
+
+            <button
+                class="teacher-action-button clear"
+                onclick="clearResults()"
+            >
+                🗑️ CLEAR RESULTS
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   ANSWER KEY
+===================================================== */
+
+const correctAnswers = [
+    12,
+    9,
+    5,
+    10,
+    8
+];
+
+
+/* =====================================================
+   CAREER MESSAGES
+===================================================== */
+
+const careerMessages = {
+
+    "Civil Engineer":
+        "🏗️ Civil engineers use measurements and proportions when designing and building structures.",
+
+    "Architect":
+        "🏛️ Architects use measurements, dimensions, and proportions when designing buildings.",
+
+    "Surveyor":
+        "📐 Surveyors use accurate measurements to determine distances and dimensions.",
+
+    "Interior Designer":
+        "🪑 Interior designers measure rooms, doors, windows, and furniture when planning spaces.",
+
+    "Construction Worker":
+        "🏠 Construction workers use accurate measurements to make sure materials and structures fit correctly.",
+
+    "Geodetic Engineer":
+        "🗺️ Geodetic engineers use precise measurements to study land, distances, and locations."
+
+};
+
+
+/* =====================================================
+   START ACTIVITY
+===================================================== */
+
+function startActivity() {
+
+    const name =
+        document.getElementById("studentName").value.trim();
+
+    const section =
+        document.getElementById("section").value;
+
+    const profession =
+        document.getElementById("profession").value;
+
+
+    if (name === "") {
+
+        alert("Please enter your name.");
+
+        return;
+    }
+
+
+    if (section === "") {
+
+        alert("Please select your section.");
+
+        return;
+    }
+
+
+    if (profession === "") {
+
+        alert("Please choose a measurement profession.");
+
+        return;
+    }
+
+
+    document.getElementById("displayName").innerText =
+        name;
+
+    document.getElementById("displaySection").innerText =
+        section;
+
+    document.getElementById("displayProfession").innerText =
+        profession;
+
+    document.getElementById("careerMessage").innerText =
+        careerMessages[profession];
+
+
+    document.getElementById("studentScreen").style.display =
+        "none";
+
+    document.getElementById("activityScreen").style.display =
+        "block";
+
+
+    window.scrollTo(0, 0);
+}
+
+
+/* =====================================================
+   SUBMIT ACTIVITY
+===================================================== */
+
+function submitActivity() {
+
+    let score = 0;
+
+
+    /* CHECK ALL ANSWERS */
+
+    for (let i = 1; i <= 5; i++) {
+
+        const answer =
+            Number(
+                document.getElementById("answer" + i).value
+            );
+
+
+        if (
+            answer ===
+            correctAnswers[i - 1]
+        ) {
+
+            score++;
+
+        }
+
+    }
+
+
+    /* GET STUDENT INFORMATION */
+
+    const name =
+        document.getElementById("studentName").value;
+
+    const section =
+        document.getElementById("section").value;
+
+    const profession =
+        document.getElementById("profession").value;
+
+
+    const percentage =
+        score * 20;
+
+
+    /* DATE AND TIME */
+
+    const now =
+        new Date();
+
+    const dateTime =
+        now.toLocaleString();
+
+
+    /* CREATE RESULT */
+
+    const result = {
+
+        name: name,
+
+        section: section,
+
+        profession: profession,
+
+        score: score,
+
+        percentage: percentage,
+
+        dateTime: dateTime
+
+    };
+
+
+    /* SAVE RESULT */
+
+    let results =
+        JSON.parse(
+            localStorage.getItem("directProportionResults")
+        ) || [];
+
+
+    results.push(result);
+
+
+    localStorage.setItem(
+        "directProportionResults",
+        JSON.stringify(results)
+    );
+
+
+    /* SHOW RESULT */
+
+    document.getElementById("resultName").innerText =
+        name;
+
+    document.getElementById("resultSection").innerText =
+        section;
+
+    document.getElementById("resultProfession").innerText =
+        profession;
+
+    document.getElementById("resultScore").innerText =
+        score;
+
+    document.getElementById("resultPercent").innerText =
+        percentage;
+
+
+    /* PERFORMANCE MESSAGE */
+
+    let message = "";
+
+    if (score === 5) {
+
+        message =
+            "🌟 Excellent! You solved all 5 problems correctly!";
+
+    }
+
+    else if (score === 4) {
+
+        message =
+            "👏 Very good! You are almost perfect!";
+
+    }
+
+    else if (score === 3) {
+
+        message =
+            "👍 Good work! Review the problems you missed.";
+
+    }
+
+    else {
+
+        message =
+            "💪 Keep practicing. Review your solutions and try again.";
+
+    }
+
+
+    document.getElementById("performance").innerText =
+        message;
+
+
+    /* SWITCH SCREEN */
+
+    document.getElementById("activityScreen").style.display =
+        "none";
+
+    document.getElementById("resultScreen").style.display =
+        "block";
+
+
+    window.scrollTo(0, 0);
+}
+
+
+/* =====================================================
+   NEW STUDENT
+===================================================== */
+
+function newStudent() {
+
+    document.getElementById("resultScreen").style.display =
+        "none";
+
+    document.getElementById("studentScreen").style.display =
+        "flex";
+
+
+    /* CLEAR INFORMATION */
+
+    document.getElementById("studentName").value =
+        "";
+
+    document.getElementById("section").value =
+        "";
+
+    document.getElementById("profession").value =
+        "";
+
+
+    /* CLEAR ANSWERS */
+
+    for (let i = 1; i <= 5; i++) {
+
+        document.getElementById("answer" + i).value =
+            "";
+
+    }
+
+
+    window.scrollTo(0, 0);
+}
+
+
+/* =====================================================
+   TEACHER DASHBOARD
+===================================================== */
+
+function showTeacherDashboard() {
+
+    document.getElementById("resultScreen").style.display =
+        "none";
+
+    document.getElementById("teacherScreen").style.display =
+        "block";
+
+
+    displayResults();
+
+
+    window.scrollTo(0, 0);
+}
+
+
+/* =====================================================
+   DISPLAY RESULTS
+===================================================== */
+
+function displayResults() {
+
+    const table =
+        document.getElementById("resultsTable");
+
+
+    table.innerHTML = "";
+
+
+    const results =
+        JSON.parse(
+            localStorage.getItem("directProportionResults")
+        ) || [];
+
+
+    if (results.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="7">
+                    No student submissions yet.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    results.forEach(
+        function(result, index) {
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>${index + 1}</td>
+
+                <td>${result.name}</td>
+
+                <td>${result.section}</td>
+
+                <td>${result.profession}</td>
+
+                <td><strong>${result.score}/5</strong></td>
+
+                <td>${result.percentage}%</td>
+
+                <td>${result.dateTime}</td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        }
+    );
+}
+
+
+/* =====================================================
+   DOWNLOAD CSV
+===================================================== */
+
+function downloadCSV() {
+
+    const results =
+        JSON.parse(
+            localStorage.getItem("directProportionResults")
+        ) || [];
+
+
+    if (results.length === 0) {
+
+        alert("There are no results to download.");
+
+        return;
+    }
+
+
+    let csv =
+        "Student Name,Section,Profession,Score,Percentage,Date and Time\n";
+
+
+    results.forEach(
+        function(result) {
+
+            csv +=
+                '"' + result.name + '",' +
+                '"' + result.section + '",' +
+                '"' + result.profession + '",' +
+                result.score + '/5,' +
+                result.percentage + '%,' +
+                '"' + result.dateTime + '"\n';
+
+        }
+    );
+
+
+    const blob =
+        new Blob(
+            [csv],
+            {
+                type: "text/csv;charset=utf-8;"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const link =
+        document.createElement("a");
+
+
+    link.setAttribute(
+        "href",
+        url
+    );
+
+
+    link.setAttribute(
+        "download",
+        "Direct_Proportion_Results.csv"
+    );
+
+
+    link.style.visibility =
+        "hidden";
+
+
+    document.body.appendChild(link);
+
+
+    link.click();
+
+
+    document.body.removeChild(link);
+}
+
+
+/* =====================================================
+   CLEAR RESULTS
+===================================================== */
+
+function clearResults() {
+
+    const confirmClear =
+        confirm(
+            "Are you sure you want to delete all saved student results?"
+        );
+
+
+    if (!confirmClear) {
+
+        return;
+    }
+
+
+    localStorage.removeItem(
+        "directProportionResults"
+    );
+
+
+    displayResults();
+
+}
+
+
+/* =====================================================
+   BACK TO RESULT
+===================================================== */
+
+function backToResult() {
+
+    document.getElementById("teacherScreen").style.display =
+        "none";
+
+    document.getElementById("resultScreen").style.display =
+        "block";
+
+
+    window.scrollTo(0, 0);
+}
+
+</script>
+
+</body>
+</html>
